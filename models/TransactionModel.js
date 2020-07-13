@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let schema = mongoose.Schema({
+const schema = mongoose.Schema({
   description: String,
   value: Number,
   category: String,
