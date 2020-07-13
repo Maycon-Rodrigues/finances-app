@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
   description: { type: String, required: true },
-  value: Number,
+  value: { type: Number, required: true },
   category: { type: String, required: true },
   year: { type: Number, required: true },
   month: { type: Number, required: true },
