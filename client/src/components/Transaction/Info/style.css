@@ -1,0 +1,13 @@
+.infoContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+
+  border-radius: 5px;
+  border: 1px solid #dddddd;
+}
+
+.infoContent span {
+  margin-left: 5px;
+}
