@@ -1,0 +1,41 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  margin: 5px;
+}
+
+.flexRow {
+  display: flex;
+  align-items: center;
+}
+
+.day {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.category {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  font-size: 1.7rem;
+  margin-right: 20px;
+}
+
+button {
+  margin-right: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
