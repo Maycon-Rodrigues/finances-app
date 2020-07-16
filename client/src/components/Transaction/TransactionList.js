@@ -14,7 +14,7 @@ export default function TransactionList() {
   const [releases, setReleases] = useState(0);
   const [input, setInput] = useState('');
 
-  const period = '2019-03';
+  const period = '2019-02';
 
   useEffect(() => {
     const getData = async () => {
@@ -36,6 +36,17 @@ export default function TransactionList() {
     d.description.toLowerCase().includes(input)
   );
 
+  const handleDelete = async (id) => {
+    const isDelete = await api.delete(`/api/transaction/delete/${id}`);
+
+    if (isDelete.status === 200) {
+      const newTransactions = transactions.filter((t) => t._id !== id);
+
+      setTransactions(newTransactions);
+      alert(isDelete.data.message);
+    }
+  };
+
   return (
     <div>
       <TransactionContext.Provider value={filter}>
@@ -43,8 +54,8 @@ export default function TransactionList() {
 
         <Info length={releases} />
 
-        {!transactions.length && <Spinner />}
-        <Card />
+        {!filter.length && <Spinner />}
+        <Card onDelete={handleDelete} />
       </TransactionContext.Provider>
     </div>
   );
