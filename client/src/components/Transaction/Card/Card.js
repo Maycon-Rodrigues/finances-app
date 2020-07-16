@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { TransactionContext } from '../TransactionList';
 
 import './style.css';
 
 import { formatMoney, formatNumber } from '../../../helpers/formatter';
 
-export default function Card({ data }) {
+export default function Card() {
+  const context = useContext(TransactionContext);
+
   return (
-    <>
-      {data.map((element) => (
+    <div className="cardScroll">
+      {context.map((element) => (
         <div
           key={element._id}
           className="content"
@@ -31,6 +35,6 @@ export default function Card({ data }) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
