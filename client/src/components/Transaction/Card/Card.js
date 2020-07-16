@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 
-import { TransactionContext } from '../TransactionList';
-
 import './style.css';
 
+import { TransactionContext } from '../TransactionList';
 import { formatMoney, formatNumber } from '../../../helpers/formatter';
 
-export default function Card() {
+export default function Card({ onDelete }) {
   const context = useContext(TransactionContext);
+
+  const handleOnDelete = (id) => {
+    onDelete(id);
+  };
 
   return (
     <div className="cardScroll">
@@ -30,8 +33,12 @@ export default function Card() {
           </div>
           <div className="flexRow">
             <span className="value">{formatMoney(element.value)}</span>
-            <span className="tiny material-icons">edit</span>
-            <span className="tiny material-icons">remove</span>
+            <button onClick={() => console.log(element)}>
+              <i className="small material-icons">edit</i>
+            </button>
+            <button onClick={() => handleOnDelete(element._id)}>
+              <i className="small material-icons">delete</i>
+            </button>
           </div>
         </div>
       ))}
