@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { TransactionContext } from '../TransactionList';
 
 import './style.css';
 
 import { formatMoney } from '../../../helpers/formatter';
 
-export default function Info({ length, data }) {
-  const income = data
+export default function Info({ length }) {
+  const contex = useContext(TransactionContext);
+
+  const income = contex
     .filter((d) => d.type === '+')
     .reduce((acc, curr) => acc + curr.value, 0);
 
-  const expenses = data
+  const expenses = contex
     .filter((d) => d.type === '-')
     .reduce((acc, curr) => acc + curr.value, 0);
 
