@@ -1,0 +1,10 @@
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.inputRow .input-field {
+  width: 50%;
+}
