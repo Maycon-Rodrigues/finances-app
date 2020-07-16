@@ -43,9 +43,8 @@
   margin-right: 20px;
 }
 
-button {
-  margin-right: 10px;
-  text-decoration: none;
+.flexRow button {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  outline: none;
 }
