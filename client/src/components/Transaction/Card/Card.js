@@ -5,11 +5,15 @@ import './style.css';
 import { TransactionContext } from '../TransactionList';
 import { formatMoney, formatNumber } from '../../../helpers/formatter';
 
-export default function Card({ onDelete }) {
+export default function Card({ onDelete, onEdit }) {
   const context = useContext(TransactionContext);
 
   const handleOnDelete = (id) => {
     onDelete(id);
+  };
+
+  const handleOnEdit = (element) => {
+    onEdit(element);
   };
 
   return (
@@ -33,7 +37,7 @@ export default function Card({ onDelete }) {
           </div>
           <div className="flexRow">
             <span className="value">{formatMoney(element.value)}</span>
-            <button onClick={() => console.log(element)}>
+            <button onClick={() => handleOnEdit(element)}>
               <i className="small material-icons">edit</i>
             </button>
             <button onClick={() => handleOnDelete(element._id)}>
