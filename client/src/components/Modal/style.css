@@ -1,0 +1,13 @@
+.formRow {
+  display: flex;
+  justify-content: space-flex;
+}
+
+.formRowButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.formRowButton button {
+  margin: 10px;
+}
