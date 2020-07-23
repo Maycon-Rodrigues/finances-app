@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
+  width: 100%;
 }
 
 .inputRow .input-field {
