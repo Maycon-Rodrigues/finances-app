@@ -12,7 +12,7 @@ module.exports = {
     const yearMonth = { yearMonth: period };
 
     try {
-      const data = await TransactionModel.find(yearMonth).exec();
+      const data = await TransactionModel.find(yearMonth).sort('day').exec();
       const qtd = data.length;
 
       res.send({ length: qtd, transactions: data });
