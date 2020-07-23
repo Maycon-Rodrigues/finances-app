@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './style.css';
-
 import Button from '../Button/Button';
 
 export default function InputFilter({ onInputChange, currentValue }) {
