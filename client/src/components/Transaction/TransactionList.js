@@ -57,19 +57,19 @@ export default function TransactionList() {
     if (transaction) {
       transaction.category = category;
       transaction.description = description;
-      transaction.value = parseInt(value);
+      transaction.value = parseFloat(value);
       transaction.yearMonthDay = yearMonthDay;
 
       await api.patch(`/api/transaction/update/${formData._id}`, formData);
 
-      setTransactions(transactions);
+      setTransactions(transactions.sort((a, b) => a.day - b.day));
     } else {
       const postData = { type, category, description, value, yearMonthDay };
 
       const res = await api.post('/api/transaction/create', postData);
       const { data } = res.data;
 
-      setTransactions([...transactions, data]);
+      setTransactions([...transactions, data].sort((a, b) => a.day - b.day));
     }
 
     setIsModalOpen(false);
