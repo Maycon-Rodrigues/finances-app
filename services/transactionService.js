@@ -41,7 +41,7 @@ module.exports = {
       const data = new TransactionModel(create);
       data.save();
 
-      res.send({ message: 'Lançamento criado com sucesso' });
+      res.send({ message: 'Lançamento criado com sucesso', data });
     } catch (error) {
       res.status(500).send({ message: 'Não foi possivel criar o lançamento' });
     }
