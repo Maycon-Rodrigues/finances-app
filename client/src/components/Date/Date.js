@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+
 import M from 'materialize-css';
+import './style.css';
 
 export default function Date({ periods, onPeriodChange, currentPeriod }) {
   useEffect(() => {
@@ -11,7 +13,7 @@ export default function Date({ periods, onPeriodChange, currentPeriod }) {
   };
 
   return (
-    <div className="container">
+    <div className="container dateContent">
       <select value={currentPeriod} onChange={handlePeriodChange}>
         {periods.map((period) => {
           return (
