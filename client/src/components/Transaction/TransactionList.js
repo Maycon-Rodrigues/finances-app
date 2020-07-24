@@ -46,10 +46,6 @@ export default function TransactionList() {
     filterTransaction(input);
   }, [input, transactions]);
 
-  // const filterTransaction = transactions.filter((d) =>
-  //   d.description.toLowerCase().includes(input)
-  // );
-
   const handleInputChange = (newValue) => {
     setInput(newValue);
   };
