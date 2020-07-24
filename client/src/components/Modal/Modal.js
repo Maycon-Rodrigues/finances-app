@@ -115,6 +115,8 @@ export default function TransactionModal({ onClose, selected, onSave }) {
                 id="inputValue"
                 name="value"
                 type="number"
+                min="0"
+                step="0.01"
                 value={value || ''}
                 onChange={handleFormChange}
               />
