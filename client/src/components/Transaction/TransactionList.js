@@ -15,12 +15,12 @@ export const TransactionContext = createContext([]);
 
 export default function TransactionList() {
   const [transactions, setTransactions] = useState([]);
-  // const [filterTransaction, setFilterTransaction] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [selected, setSelected] = useState({});
   const [currentPeriod, setCurrentPeriod] = useState(PERIODS[0]);
-  const [releases, setReleases] = useState(0);
   const [input, setInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log(transactions);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,39 +29,53 @@ export default function TransactionList() {
       ).data;
 
       setTransactions(result.transactions);
-      // setFilterTransaction(result.transactions);
-      setReleases(result.length);
     };
 
     getData();
   }, [currentPeriod]);
 
+  useEffect(() => {
+    const filterTransaction = (input) => {
+      const filtered = transactions.filter((d) =>
+        d.description.toLowerCase().includes(input)
+      );
+
+      setFiltered(filtered);
+    };
+
+    filterTransaction(input);
+  }, [input, transactions]);
+
+  // const filterTransaction = transactions.filter((d) =>
+  //   d.description.toLowerCase().includes(input)
+  // );
+
   const handleInputChange = (newValue) => {
     setInput(newValue);
-    // setFilterTransaction(filter);
   };
 
-  const filter = transactions.filter((d) =>
-    d.description.toLowerCase().includes(input)
-  );
-
   const handleSave = async (formData) => {
-    const { _id, category, description, value, yearMonthDay } = formData;
-    // const newTransaction = [...transactions];
-    // const newTransaction = Object.assign([], transactions);
-    // let transaction = newTransaction.find((t) => t._id === _id);
-    // transaction = formData
+    const { _id, type, category, description, value, yearMonthDay } = formData;
 
     const transaction = transactions.find((t) => t._id === _id);
-    transaction.category = category;
-    transaction.description = description;
-    transaction.value = value;
-    transaction.yearMonthDay = yearMonthDay;
+    if (transaction) {
+      transaction.category = category;
+      transaction.description = description;
+      transaction.value = parseInt(value);
+      transaction.yearMonthDay = yearMonthDay;
 
-    await api.patch(`/api/transaction/update/${formData._id}`, formData);
+      await api.patch(`/api/transaction/update/${formData._id}`, formData);
 
-    setTransactions(transactions);
-    // setTransactions([...newTransaction, transaction]);
+      setTransactions(transactions);
+    } else {
+      const postData = { type, category, description, value, yearMonthDay };
+
+      const res = await api.post('/api/transaction/create', postData);
+      const { data } = res.data;
+
+      setTransactions([...transactions, data]);
+    }
+
     setIsModalOpen(false);
   };
 
@@ -85,24 +99,31 @@ export default function TransactionList() {
     setSelected(transaction);
   };
 
+  const handleNew = () => {
+    setSelected({});
+    setIsModalOpen(true);
+  };
+
   const handlePeriodChage = (newDate) => {
     setCurrentPeriod(newDate);
   };
 
   return (
     <div>
-      <TransactionContext.Provider value={filter}>
+      <TransactionContext.Provider value={filtered}>
         <Date
           periods={PERIODS}
           currentPeriod={currentPeriod}
           onPeriodChange={handlePeriodChage}
         />
 
-        <InputFilter currentValue={input} onInputChange={handleInputChange} />
+        <TransactionContext.Provider value={handleNew}>
+          <InputFilter currentValue={input} onInputChange={handleInputChange} />
+        </TransactionContext.Provider>
 
-        <Info length={releases} />
+        <Info length={transactions.length} />
 
-        {!filter.length && <Spinner />}
+        {!transactions.length && <Spinner />}
         <Card
           onDelete={handleDelete}
           onEdit={handleEdit}
