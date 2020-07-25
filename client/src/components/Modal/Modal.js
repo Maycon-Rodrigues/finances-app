@@ -23,7 +23,12 @@ const customStyles = {
   },
 };
 
-export default function TransactionModal({ onClose, selected, onSave }) {
+export default function TransactionModal({
+  onClose,
+  selected,
+  onSave,
+  isEditing,
+}) {
   const [transaction, setTransaction] = useState(selected);
 
   const { category, description, type, value, yearMonthDay } = transaction;
@@ -62,9 +67,11 @@ export default function TransactionModal({ onClose, selected, onSave }) {
                     value="+"
                     checked={type === '+' ? true : false}
                     onChange={handleFormChange}
-                    disabled={type ? true : false}
+                    disabled={isEditing}
                   />
-                  <span>Receita</span>
+                  <span style={!isEditing ? { color: 'green' } : {}}>
+                    Receita
+                  </span>
                 </label>
               </p>
 
@@ -77,9 +84,11 @@ export default function TransactionModal({ onClose, selected, onSave }) {
                     value="-"
                     checked={type === '-' ? true : false}
                     onChange={handleFormChange}
-                    disabled={type ? true : false}
+                    disabled={isEditing}
                   />
-                  <span>Despesa</span>
+                  <span style={!isEditing ? { color: 'red' } : {}}>
+                    Despesa
+                  </span>
                 </label>
               </p>
             </div>
