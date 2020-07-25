@@ -20,7 +20,7 @@ export default function TransactionList() {
   const [currentPeriod, setCurrentPeriod] = useState(PERIODS[0]);
   const [input, setInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // console.log(transactions);
+  const [isEditing, setIsEditing] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -91,6 +91,7 @@ export default function TransactionList() {
   };
 
   const handleEdit = (transaction) => {
+    setIsEditing(true);
     setIsModalOpen(true);
     setSelected(transaction);
   };
@@ -98,6 +99,7 @@ export default function TransactionList() {
   const handleNew = () => {
     setSelected({});
     setIsModalOpen(true);
+    setIsEditing(false);
   };
 
   const handlePeriodChage = (newDate) => {
@@ -130,6 +132,7 @@ export default function TransactionList() {
           <TransactionModal
             onClose={handleClose}
             selected={selected}
+            isEditing={isEditing}
             onSave={handleSave}
           />
         )}
