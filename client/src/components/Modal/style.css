@@ -1,6 +1,6 @@
 .formRow {
   display: flex;
-  justify-content: space-flex;
+  justify-content: space-around;
 }
 
 .formRowButton {
