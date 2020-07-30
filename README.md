@@ -59,4 +59,4 @@ $ yarn start
 
 ## :memo: License
 
-This project is under the MIT license.
+Este projeto está sob a licença MIT.
